@@ -13,6 +13,7 @@
 		2EE088EA2600EFBC00985E08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EE088E92600EFBC00985E08 /* Assets.xcassets */; };
 		2EE088ED2600EFBC00985E08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE088EB2600EFBC00985E08 /* LaunchScreen.storyboard */; };
 		2EE088F72600F30F00985E08 /* BountyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE088F62600F30F00985E08 /* BountyViewController.swift */; };
+		2EE088FB2601091E00985E08 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE088FA2601091E00985E08 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2EE088EC2600EFBC00985E08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EE088EE2600EFBC00985E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EE088F62600F30F00985E08 /* BountyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyViewController.swift; sourceTree = "<group>"; };
+		2EE088FA2601091E00985E08 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 			children = (
 				2EE088E02600EFBB00985E08 /* AppDelegate.swift */,
 				2EE088E22600EFBB00985E08 /* SceneDelegate.swift */,
-				2EE088E62600EFBB00985E08 /* Main.storyboard */,
 				2EE088F62600F30F00985E08 /* BountyViewController.swift */,
+				2EE088FA2601091E00985E08 /* DetailViewController.swift */,
+				2EE088E62600EFBB00985E08 /* Main.storyboard */,
 				2EE088E92600EFBC00985E08 /* Assets.xcassets */,
 				2EE088EB2600EFBC00985E08 /* LaunchScreen.storyboard */,
 				2EE088EE2600EFBC00985E08 /* Info.plist */,
@@ -140,6 +143,7 @@
 				2EE088E12600EFBB00985E08 /* AppDelegate.swift in Sources */,
 				2EE088F72600F30F00985E08 /* BountyViewController.swift in Sources */,
 				2EE088E32600EFBB00985E08 /* SceneDelegate.swift in Sources */,
+				2EE088FB2601091E00985E08 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
