@@ -27,21 +27,11 @@ class DetailViewController: UIViewController {
     
     // > 모델 가지고 있기, BountyInfo 들을 가지고 있어야한다.
     
-    
-    
-    
-    
-    
-    
-
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bountyLabel: UILabel!
-    
-//    var name: String?
-//    var bounty: Int?
-    
-    var bountyInfo: BountyInfo?
+
+    let viewModel = DetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +41,7 @@ class DetailViewController: UIViewController {
     
     func updateUI() {
         
-        if let bountyInfo=self.bountyInfo{
+        if let bountyInfo=self.viewModel.bountyInfo{
             imgView.image = bountyInfo.image
             nameLabel.text = bountyInfo.name
             bountyLabel.text = "\(bountyInfo.bounty)"
@@ -64,4 +54,11 @@ class DetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+}
+class DetailViewModel{
+    var bountyInfo : BountyInfo?
+    
+    func update(model: BountyInfo?){
+        bountyInfo = model
+    }
 }

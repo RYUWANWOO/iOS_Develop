@@ -7,7 +7,8 @@
 
 import UIKit
 
-class BountyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class BountyViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout{
     
     
     //MVVM
@@ -25,23 +26,8 @@ class BountyViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     // > 모델 가지고 있기, BountyInfo 들을 가지고 있어야한다.
     
-    
-    let bountyInfoList : [BountyInfo] = [
-        BountyInfo(name: "brook", bounty: 33000000),
-        BountyInfo(name: "chopper",bounty:50),
-        BountyInfo(name: "franky", bounty: 44000000),
-        BountyInfo(name: "luffy", bounty: 30000000),
-        BountyInfo(name: "nami", bounty: 16000000),
-        BountyInfo(name: "robin", bounty: 8000000),
-        BountyInfo(name: "sanji", bounty: 77000000),
-        BountyInfo(name: "zoro", bounty: 120000000)
-    ]
-    
-    
-    
 //
-//    let nameList = ["brook","chopper","franky","luffy","nami","robin","sanji","zoro"]
-//    let bountyList = [33000000,50,44000000,300000000,16000000,80000000,77000000,120000000]
+      let viewModel = BountyViewModel()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // DetailViewController 데이터 줄꺼에요
@@ -49,12 +35,8 @@ class BountyViewController: UIViewController,UITableViewDataSource,UITableViewDe
             let vc = segue.destination as? DetailViewController
             
             if let index = sender as? Int{
-                let bountyInfo = bountyInfoList[index]
-//                vc?.name = bountyInfo.name
-//                vc?.bounty = bountyInfo.bounty
-                vc?.bountyInfo = bountyInfo
-//                vc?.name = nameList[index]
-//                vc?.bounty = bountyList[index]
+                let bountyInfo = viewModel.bountyInfo(at: index)
+                vc?.viewModel.update(model : bountyInfo)
             }
             
         }
@@ -66,42 +48,57 @@ class BountyViewController: UIViewController,UITableViewDataSource,UITableViewDe
         // Do any additional setup after loading the view.
     }
     
-    //UITableViewDataSource
+    //UICollectionViewDataSource
+    //몇개를 보여줄까요?
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bountyInfoList.count
-        //return bountyList.count
-        
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int)->Int{
+        return viewModel.numOfBountyInfoList
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else{
-            return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as?
+                GridCell else{
+                return UICollectionViewCell()
         }
         
-        let bountyInfo = bountyInfoList[indexPath.row]
-        cell.imgView.image = bountyInfo.image
-        cell.nameLabel.text = bountyInfo.name
-        cell.bountyLabel.text = "\(bountyInfo.bounty)"
+        let bountyInfo = viewModel.bountyInfo(at: indexPath.item)
+                cell.update(info: bountyInfo)
+        cell.update(info: bountyInfo)
         return cell
-        
-//        let img = UIImage(named: "\(nameList[indexPath.row]).jpg")
-//        cell.imgView.image = img
-//        cell.nameLabel.text = nameList[indexPath.row]
-//        cell.bountyLabel.text = "\(bountyList[indexPath.row])"
-//        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("--> \(indexPath.item)")
+        performSegue(withIdentifier: "showDetail", sender: indexPath.item)
+    }
 
-
+    //셀은 어떻게 표현 할 까요?
+    
+    //UICollectionviewdelegate,
+    //셀이 클리 되었을때 어떻할까요?
+    
+    //UIcollectiondelegateflowlayout
+    //calc cell size (다양한 디바이스에서 일관적인 디자인을 보여주기 위해)
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let itemSpacing: CGFloat = 10
+        let textAreaHeight :CGFloat = 65
+        
+        let width : CGFloat = (collectionView.bounds.width - itemSpacing)/2
+        let height : CGFloat = (width/7*10)+textAreaHeight
+        
+        
+        
+        
+        
+        return CGSize(width:width, height:height)
     }
     
     
-    //UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("--> \(indexPath.row)")
-        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
-    }
+
+
 }
 
 class ListCell: UITableViewCell{
@@ -109,19 +106,58 @@ class ListCell: UITableViewCell{
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bountyLabel: UILabel!
+    
+    func update(info : BountyInfo){
+        imgView.image = info.image
+        nameLabel.text = info.name
+        bountyLabel.text = "\(info.bounty)"
+        
+    }
+}
+
+class GridCell: UICollectionViewCell{
+    
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var bountyLabel: UILabel!
+
+    func update(info : BountyInfo){
+        imgView.image = info.image
+        nameLabel.text = info.name
+        bountyLabel.text = "\(info.bounty)"
+
+    }
+
 }
 
 
-struct BountyInfo {
-    let name: String
-    let bounty: Int
-        
-    var image : UIImage?{
-        return UIImage(named: "\(name).jpg")
+class BountyViewModel{
+    
+    let bountyInfoList : [BountyInfo] = [
+        BountyInfo(name: "brook", bounty: 33000000),
+        BountyInfo(name: "chopper",bounty:50),
+        BountyInfo(name: "franky", bounty: 44000000),
+        BountyInfo(name: "luffy", bounty: 300000000),
+        BountyInfo(name: "nami", bounty: 16000000),
+        BountyInfo(name: "robin", bounty: 8000000),
+        BountyInfo(name: "sanji", bounty: 77000000),
+        BountyInfo(name: "zoro", bounty: 120000000)
+    ]
+    
+    var sortedList : [BountyInfo]{
+        let sortedList = bountyInfoList.sorted{prev, next in
+            return prev.bounty > next.bounty
+        }
+        return sortedList
     }
     
-    init(name: String,bounty :Int){
-        self.name = name
-        self.bounty = bounty
+    var numOfBountyInfoList : Int{
+        return bountyInfoList.count
     }
+    
+    func bountyInfo(at index: Int)->BountyInfo{
+        return sortedList[index]
+        
+    }
+    
 }
