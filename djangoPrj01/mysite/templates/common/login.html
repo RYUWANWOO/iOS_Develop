@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <title>Login</title>
+</head>
+<body>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+
+<div class="class-name-form">
+    <h1>Eclass</h1>
+    <img src = "{% static 'loginpage_image.png' %}"  width="15%">
+</div>
+
+<div class="login-form">
+    <form method="post" class="post-form" action="{% url 'common:login' %}">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+            <input type="text" class="text-field" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}" placeholder="아이디">
+            <input type="password" class="text-field" name="password" id="password"
+                   value="{{ form.password.value|default_if_none:'' }}" placeholder="비밀번호">
+            <input type="submit" value="로그인" class="submit-btn">
+
+    </form>
+
+    <div class="links">
+        <a href="{% url 'common:signup' %}">계정이 없으신가요? 계정을 만드세요.</a>
+        <br>
+        <a href="#">비밀번호를 잊어버리셨나요?</a>
+    </div>
+
+</div>
+
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+</body>
+</html>

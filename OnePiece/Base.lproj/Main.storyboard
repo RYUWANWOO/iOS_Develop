@@ -120,13 +120,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luffy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qC-SR-1c4">
-                                <rect key="frame" x="156.66666666666666" y="559" width="76.666666666666657" height="36"/>
+                                <rect key="frame" x="256.66666666666669" y="559" width="76.666666666666686" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30000000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sae-TK-7MU">
-                                <rect key="frame" x="112" y="640" width="166" height="36"/>
+                                <rect key="frame" x="212" y="640" width="166" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -141,15 +141,17 @@
                             <constraint firstItem="sae-TK-7MU" firstAttribute="top" secondItem="7qC-SR-1c4" secondAttribute="bottom" constant="45" id="Tma-oD-4Pq"/>
                             <constraint firstItem="iuU-9Q-30J" firstAttribute="top" secondItem="e9H-4i-H26" secondAttribute="top" constant="100" id="X2T-xH-Rdx"/>
                             <constraint firstItem="7qC-SR-1c4" firstAttribute="top" secondItem="iuU-9Q-30J" secondAttribute="bottom" constant="44.666666666666742" id="dx2-mG-hUK"/>
-                            <constraint firstItem="7qC-SR-1c4" firstAttribute="centerX" secondItem="iuU-9Q-30J" secondAttribute="centerX" id="klh-b2-Kvi"/>
+                            <constraint firstItem="7qC-SR-1c4" firstAttribute="centerX" secondItem="iuU-9Q-30J" secondAttribute="centerX" constant="100" id="klh-b2-Kvi"/>
                             <constraint firstItem="e9H-4i-H26" firstAttribute="trailing" secondItem="e3X-gm-eFk" secondAttribute="trailing" constant="16" id="olc-5I-5iv"/>
                             <constraint firstItem="e3X-gm-eFk" firstAttribute="top" secondItem="e9H-4i-H26" secondAttribute="top" constant="20" id="rSS-aT-Wbw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bountyLabel" destination="sae-TK-7MU" id="r3c-FT-MVW"/>
+                        <outlet property="bountyLabelCenterX" destination="OOh-ub-zth" id="Sof-ca-87F"/>
                         <outlet property="imgView" destination="iuU-9Q-30J" id="qn8-9U-cdl"/>
                         <outlet property="nameLabel" destination="7qC-SR-1c4" id="YYr-J2-691"/>
+                        <outlet property="nameLabelCenterX" destination="klh-b2-Kvi" id="oqA-GY-ADX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4o-UM-0EK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
